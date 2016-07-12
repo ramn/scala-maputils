@@ -20,7 +20,7 @@ object Monoid {
 object MapUtils {
   def merge[A, B, M : Monoid](maps: Seq[Map[A, M]]): Map[A, M] = {
     val append = implicitly[Monoid[M]].append _
-    maps.reduceLeft { (memo, elem) =>
+    maps.foldLeft(Map.empty[A, M]) { (memo, elem) =>
       elem.foldLeft(memo) { case (memo, (key, value)) =>
         memo.updated(key, memo.get(key).map(append(_, value)).getOrElse(value))
       }

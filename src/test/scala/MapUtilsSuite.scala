@@ -13,4 +13,9 @@ class MapUtilsSuite extends FunSuite {
     val input = Seq(Map('a -> 2), Map('a -> 4, 'b -> 1))
     assert(merge(input) === Map('a -> 6, 'b -> 1))
   }
+
+  test("handle empty list of maps") {
+    val input = Seq.empty[Map[Symbol, Int]]
+    assert(merge(input) === Map.empty)
+  }
 }
